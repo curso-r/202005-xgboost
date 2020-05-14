@@ -187,7 +187,7 @@ modelo_xgb <- boost_tree(
 ]
 
 .pull-right[
-<a href = "httphttps://www.youtube.com/user/joshstarmer">
+<a href = "https://www.youtube.com/user/joshstarmer">
 <img src="img/statquest_logo.jpg" style=" display: block; margin-left: auto; margin-right: auto;width:300px"></img>
 </a>
 ]
@@ -214,6 +214,15 @@ modelo_xgb <- boost_tree(
 
 
 ]
+
+
+---
+
+# XGBoost
+
+<a href = "https://towardsdatascience.com/how-i-got-in-the-top-1-on-kaggle-79ddd7c07f1c">
+<img src="img/xgb_exemplo.png" style=" display: block; margin-left: auto; margin-right: auto;width:300px"></img>
+</a>
 
 ---
 
