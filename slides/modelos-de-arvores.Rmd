@@ -1,0 +1,290 @@
+---
+title: "Workshop de XGBoost"
+subtitle: "Teoria e prática"
+author: "<img src = 'https://d33wubrfki0l68.cloudfront.net/9b0699f18268059bdd2e5c21538a29eade7cbd2b/67e5c/img/logo/cursor1-5.png' width = '40%'>"
+date: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["default", "default-fonts", "css/custom.css", "css/curso-r-bg.css", "css/xaringan-themer.css"]
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+---
+
+```{r setup, include=FALSE}
+library(ggplot2)
+library(magrittr)
+library(knitr)
+library(tidymodels)
+library(tidyverse)
+library(kableExtra)
+theme_set(theme_minimal(14))
+options(htmltools.dir.version = FALSE, fig.retina = 2)
+```
+
+
+
+# Curso-R
+
+<img src="img/professores.png" style=" display: block; margin-left: auto; margin-right: auto;" width = 75% ></img>
+
+---
+
+## Linha do tempo
+
+<center>
+<img src="img/linha_do_tempo.png" width = 35%></img>
+</center>
+
+---
+
+## Nossos cursos
+
+.pull-left[
+<div class="container center">
+  <div class="card">
+    <h3 class = "no-margin-top">Programação em R</h3>
+    <hr style = "background-color: #3bb44a;"/>
+    <p><a href = "https://www.curso-r.com/cursos/r4ds-1/">R para Ciência de dados I</a></p>
+    <p><a href = "https://www.curso-r.com/cursos/r4ds-2/">R para Ciência de dados II</a></p>
+  </div>
+</div>
+
+<br>
+
+<div class="container center">
+  <div class="card">
+    <h3 class = "no-margin-top">Modelagem</h3>
+    <hr style = "background-color: #996699;"/>
+    <p><a href = "https://www.curso-r.com/cursos/regressao/">Regressão Linear</a></p>
+    <p><a href = "https://www.curso-r.com/cursos/intro-machine-learning/">Machine Learning</a></p>
+    <p><a href = "https://www.curso-r.com/cursos/xgboost/">XGBoost</a></p>
+    <p><a href = "https://www.curso-r.com/cursos/deep-learning/">Deep Learning</a></p>
+  </div>
+</div>
+]
+
+
+.pull-right[
+<div class="container center">
+  <div class="card">
+    <h3 class = "no-margin-top">Extração de dados</h3>
+    <hr style = "background-color: #eeba30;"/>
+    <p><a href = "https://www.curso-r.com/cursos/web-scraping-1/">Web scraping I</a></p>
+        <p><a href = "https://www.curso-r.com/cursos/web-scraping-2/">Web scraping II</a></p>
+  </div>
+</div>
+
+<br>
+
+<div class="container center">
+  <div class="card">
+    <h3 class = "no-margin-top">Comunicação e automação</h3>
+    <hr style = "background-color: #ff6699;"/>
+    <p><a href = "https://www.curso-r.com/cursos/dashboards/">Dashboards com R</a></p>
+        <p><a href = "https://www.curso-r.com/cursos/deploy/">Deploy</a></p>
+  </div>
+</div>
+]
+
+---
+
+# Conteúdo
+
+- Introdução
+
+- XGBoost - passo a passo
+
+- XGBoost - Teoria
+
+- Tidymodels
+
+- Hiperparâmetros/Estratégias
+
+---
+
+# Agenda
+
+.pull-left[
+### 9h - Intro e Teoria
+
+- Google Classroom + Introdução
+- Mostrar as contas na mão num exemplo de 4 pontos (regressão)
+- Mostrar as diferenças entre classificação e regressão
+- Exercícios de Quiz (sem R)
+- Exercícios de Script (algoritmo na mao feito em R)
+
+### 12h - Almoço
+]
+
+
+.pull-right[
+
+### 13h - Na prática
+- Pacote tidymodels
+- Como que a matriz X tem que ir (dummy etc)
+- Exercícios de Script (script.R único)
+
+### 15h - Hiperparâmetros
+- Overfitting/Computação
+- Exercícios de Quiz (sem R)
+- Exercício de treino de tunagem
+- Kaggle InClass
+]
+
+
+---
+
+# No R
+
+```{r, eval=FALSE}
+# XGBoost
+modelo_xgb <- boost_tree(
+  min_n = tune(),
+  mtry = tune(),
+  trees = tune(),
+  tree_depth = tune(),
+  learn_rate = tune(),
+  loss_reduction = tune(),
+  sample_size = tune() 
+)
+```
+
+
+---
+
+
+# Referências
+
+.pull-left[
+<a href = "https://web.stanford.edu/~hastie/Papers/ESLII.pdf">
+<img src="img/esl.jpg" style=" display: block; margin-left: auto; margin-right: auto;width:300px;"></img>
+</a>
+]
+
+.pull-right[
+<a href = "http://faculty.marshall.usc.edu/gareth-james/ISL/ISLR%20Seventh%20Printing.pdf">
+<img src="img/isl.jpg" style=" display: block; margin-left: auto; margin-right: auto;width:300px"></img>
+</a>
+]
+
+---
+
+
+# Referências
+
+.pull-left[
+<br>
+
+<br>
+
+<a href = "https://xgboost.readthedocs.io/en/latest/tutorials/model.html">
+<img src="img/xgboost_logo.png" style=" display: block; margin-left: auto; margin-right: auto;width:300px;"></img>
+</a>
+]
+
+.pull-right[
+<a href = "httphttps://www.youtube.com/user/joshstarmer">
+<img src="img/statquest_logo.jpg" style=" display: block; margin-left: auto; margin-right: auto;width:300px"></img>
+</a>
+]
+
+---
+
+# Supervised Machine Learning
+
+.pull-left[
+
+<img src="img/curvas.png" style=" display: block; margin-left: auto; margin-right: auto;" width = 100% ></img>
+
+
+]
+
+
+.pull-right[
+
+<br>
+
+<br>
+
+<img src="img/y_fx2.png" style=" display: block; margin-left: auto; margin-right: auto;" width = 100% ></img>
+
+
+]
+
+---
+
+class: sem-padding
+
+<img src="img/arvore_rf_gbm.png" style="width: 100%;margin -1000px" />
+
+
+---
+
+# Intuição dos hiperparâmetros
+
+
+
+<img src="img/xgboost_tuned.gif" style="width: 40%;"/>
+
+
+---
+
+class: inverse, middle, center
+
+# XGBoost
+
+## Exemplo passo-a-passo
+
+
+---
+
+# Extrapolação dos modelos de árvores
+
+```{r, echo=FALSE, fig.asp=0.5, fig.width=14}
+set.seed(1)
+dados <- tibble(
+  x = runif(200) - 0.5,
+  y = sin(x * pi * 2) + rnorm(200, sd = 0.3)
+)
+
+modelo <- boost_tree(
+  mode = "regression", 
+  mtry = 1, 
+  trees = 250, 
+  min_n = 2, 
+  tree_depth = 5, 
+  learn_rate = 0.1, 
+  sample_size = 0.9, 
+  loss_reduction = 0.9
+) %>%
+  set_engine("xgboost", base_score = 0)
+
+ajuste <- fit(modelo, y ~ x, data = dados)
+
+dados_xgb <- dados %>% select(x) %>% as.matrix()
+
+
+dados_extr <- tibble(x = seq(-1, 1, length.out = 1000)) 
+dados_xgb_extr <- dados_extr %>% select(x) %>% as.matrix()
+dados_extr <- dados_extr %>%
+  mutate(
+    pred = xgboost:::predict.xgb.Booster(ajuste$fit, newdata = dados_xgb_extr, ntreelimit = 0)
+  )
+
+dados %>%
+  mutate(
+    pred = xgboost:::predict.xgb.Booster(ajuste$fit, newdata = dados_xgb, ntreelimit = 0)
+  ) %>%
+  ggplot(aes(x = x)) +
+  geom_point(aes(y = y), size = 2, alpha = 0.4) +
+  stat_function(fun = ~sin(. * pi * 2), colour = "purple", size = 1.5) +
+  geom_step(aes(y = pred), colour = "orange", size = 2) +
+  geom_step(aes(y = pred), colour = "orange", size = 2, linetype = "dashed", data = dados_extr) +
+  theme_minimal(30)
+```
+
+
