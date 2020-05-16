@@ -96,11 +96,9 @@ options(htmltools.dir.version = FALSE, fig.retina = 2)
 
 - Introdução
 
-- XGBoost - passo a passo
-
 - XGBoost - Teoria
 
-- Tidymodels
+- XGBoost - passo a passo
 
 - Hiperparâmetros/Estratégias
 
@@ -126,7 +124,6 @@ options(htmltools.dir.version = FALSE, fig.retina = 2)
 ### 13h - Na prática
 - Pacote tidymodels
 - Como que a matriz X tem que ir (dummy etc)
-- Exercícios de Script (script.R único)
 
 ### 15h - Hiperparâmetros
 - Overfitting/Computação
@@ -192,37 +189,58 @@ modelo_xgb <- boost_tree(
 </a>
 ]
 
----
-
-# Supervised Machine Learning
-
-.pull-left[
-
-<img src="img/curvas.png" style=" display: block; margin-left: auto; margin-right: auto;" width = 100% ></img>
-
-
-]
-
-
-.pull-right[
-
-<br>
-
-<br>
-
-<img src="img/y_fx2.png" style=" display: block; margin-left: auto; margin-right: auto;" width = 100% ></img>
-
-
-]
-
 
 ---
 
 # XGBoost
 
 <a href = "https://towardsdatascience.com/how-i-got-in-the-top-1-on-kaggle-79ddd7c07f1c">
-<img src="img/xgb_exemplo.png" style=" display: block; margin-left: auto; margin-right: auto;width:300px"></img>
+<img src="img/xgb_exemplo1.png" style=" display: block; margin-left: auto; margin-right: auto;width:600px"></img>
 </a>
+
+---
+
+# XGBoost
+
+.pull-left[
+
+### Coisas boas
+
+- Bom para dados tabulares. Preparado para bases arbitrariamente grandes.
+
+- Bom para quando precisamos de boas previsões.
+
+- Implementado nas principais ferramentas de ciência de dados.
+
+- Open Source.
+
+]
+
+.pull-right[
+
+### Coisas ruins
+
+- Possui mais hiperparâmetros do que os demais algoritmos.
+
+- Difícil de explicar ao gestor como funciona em poucas palavras.
+
+- Menos interpretável do que regressão linear e árvore de decisão.
+
+]
+
+---
+
+# XGBoost
+
+## Objetivos do Workshop
+
+Ao final do dia, o aluno 
+
+- Saberá explicar como o XGBoost funciona.
+
+- Terá mais uma opção de escolha além da regressão logística/linear, random forest, redes neurais, knn, entre outras.
+
+- Ficará a vontade em propor o uso de XGBoost em seu trabalho.
 
 ---
 
@@ -231,13 +249,48 @@ class: sem-padding
 <img src="img/arvore_rf_gbm.png" style="width: 100%;margin -1000px" />
 
 
+
+<!-- --- -->
+
+<!-- # Supervised Machine Learning -->
+
+<!-- .pull-left[ -->
+
+<!-- <img src="img/curvas.png" style=" display: block; margin-left: auto; margin-right: auto;" width = 100% ></img> -->
+
+
+<!-- ] -->
+
+
+<!-- .pull-right[ -->
+
+<!-- <br> -->
+
+<!-- <br> -->
+
+<!-- <img src="img/y_fx2.png" style=" display: block; margin-left: auto; margin-right: auto;" width = 100% ></img> -->
+
+
+<!-- ] -->
+
+
 ---
 
-# Intuição dos hiperparâmetros
+# Intuição das somas de árvores
 
+.pull-left[
 
+<img src="img/xgboost_tuned.gif" style="width: 100%;"/>
 
-<img src="img/xgboost_tuned.gif" style="width: 40%;"/>
+]
+
+.pull-right[
+
+Cada "step" é uma árvore
+
+<img src="img/xgb_arvores.png" style="width: 100%;"/>
+
+]
 
 
 ---
@@ -246,7 +299,38 @@ class: inverse, middle, center
 
 # XGBoost
 
-## Exemplo passo-a-passo
+## Exemplo passo-a-passo (no pptx)
+
+
+---
+
+class: inverse, middle, center
+
+# XGBoost
+
+## Na prática
+
+---
+
+# Sobre os problemas nos dados
+
+- XGBoost trata missing automaticamente dentro dele, não precisa tratar. Porém, sempre vale técnicas de imputação para tentar aprimorar o modelo!
+
+- Multicolinearidade não é um problema grave para modelos de árvore. Mas é sempre bom filtrar variáveis explicativas muito correlacionadas. [Ler esse post para exemplo.](https://www.curso-r.com/blog/2018-05-22-arvore-e-multicolinearidade/)
+
+- Variável resposta precisa ir como factor. Não pode ser character nem 0/1.
+
+- As variáveis categóricas precisam ser "dummyficadas" antes. XGBoost só aceita explicativas numéricas.
+
+- A escala das variáveis explicativas não atrapalham modelos de árvores.
+
+- A assimetria das variáveis explicativas não atrapalham modelos de árvores.
+
+
+---
+
+# Intuição de overfitting
+
 
 
 ---

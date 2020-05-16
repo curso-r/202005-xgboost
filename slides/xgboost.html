@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
   <head>
     <title>Workshop de XGBoost</title>
     <meta charset="utf-8" />
     <meta name="author" content="" />
-    <meta name="date" content="2020-05-14" />
+    <meta name="date" content="2020-05-15" />
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
     <link rel="stylesheet" href="css\custom.css" type="text/css" />
@@ -18,7 +18,7 @@ class: center, middle, inverse, title-slide
 # Workshop de XGBoost
 ## Teoria e prática
 ### <img src = 'https://d33wubrfki0l68.cloudfront.net/9b0699f18268059bdd2e5c21538a29eade7cbd2b/67e5c/img/logo/cursor1-5.png' width = '40%'>
-### 2020-05-14
+### 2020-05-15
 
 ---
 
@@ -96,11 +96,9 @@ class: center, middle, inverse, title-slide
 
 - Introdução
 
-- XGBoost - passo a passo
-
 - XGBoost - Teoria
 
-- Tidymodels
+- XGBoost - passo a passo
 
 - Hiperparâmetros/Estratégias
 
@@ -126,7 +124,6 @@ class: center, middle, inverse, title-slide
 ### 13h - Na prática
 - Pacote tidymodels
 - Como que a matriz X tem que ir (dummy etc)
-- Exercícios de Script (script.R único)
 
 ### 15h - Hiperparâmetros
 - Overfitting/Computação
@@ -193,37 +190,58 @@ modelo_xgb &lt;- boost_tree(
 &lt;/a&gt;
 ]
 
----
-
-# Supervised Machine Learning
-
-.pull-left[
-
-&lt;img src="img/curvas.png" style=" display: block; margin-left: auto; margin-right: auto;" width = 100% &gt;&lt;/img&gt;
-
-
-]
-
-
-.pull-right[
-
-&lt;br&gt;
-
-&lt;br&gt;
-
-&lt;img src="img/y_fx2.png" style=" display: block; margin-left: auto; margin-right: auto;" width = 100% &gt;&lt;/img&gt;
-
-
-]
-
 
 ---
 
 # XGBoost
 
 &lt;a href = "https://towardsdatascience.com/how-i-got-in-the-top-1-on-kaggle-79ddd7c07f1c"&gt;
-&lt;img src="img/xgb_exemplo.png" style=" display: block; margin-left: auto; margin-right: auto;width:300px"&gt;&lt;/img&gt;
+&lt;img src="img/xgb_exemplo1.png" style=" display: block; margin-left: auto; margin-right: auto;width:600px"&gt;&lt;/img&gt;
 &lt;/a&gt;
+
+---
+
+# XGBoost
+
+.pull-left[
+
+### Coisas boas
+
+- Bom para dados tabulares. Preparado para bases arbitrariamente grandes.
+
+- Bom para quando precisamos de boas previsões.
+
+- Implementado nas principais ferramentas de ciência de dados.
+
+- Open Source.
+
+]
+
+.pull-right[
+
+### Coisas ruins
+
+- Possui mais hiperparâmetros do que os demais algoritmos.
+
+- Difícil de explicar ao gestor como funciona em poucas palavras.
+
+- Menos interpretável do que regressão linear e árvore de decisão.
+
+]
+
+---
+
+# XGBoost
+
+## Objetivos do Workshop
+
+Ao final do dia, o aluno 
+
+- Saberá explicar como o XGBoost funciona.
+
+- Terá mais uma opção de escolha além da regressão logística/linear, random forest, redes neurais, knn, entre outras.
+
+- Ficará a vontade em propor o uso de XGBoost em seu trabalho.
 
 ---
 
@@ -232,13 +250,48 @@ class: sem-padding
 &lt;img src="img/arvore_rf_gbm.png" style="width: 100%;margin -1000px" /&gt;
 
 
+
+&lt;!-- --- --&gt;
+
+&lt;!-- # Supervised Machine Learning --&gt;
+
+&lt;!-- .pull-left[ --&gt;
+
+&lt;!-- &lt;img src="img/curvas.png" style=" display: block; margin-left: auto; margin-right: auto;" width = 100% &gt;&lt;/img&gt; --&gt;
+
+
+&lt;!-- ] --&gt;
+
+
+&lt;!-- .pull-right[ --&gt;
+
+&lt;!-- &lt;br&gt; --&gt;
+
+&lt;!-- &lt;br&gt; --&gt;
+
+&lt;!-- &lt;img src="img/y_fx2.png" style=" display: block; margin-left: auto; margin-right: auto;" width = 100% &gt;&lt;/img&gt; --&gt;
+
+
+&lt;!-- ] --&gt;
+
+
 ---
 
-# Intuição dos hiperparâmetros
+# Intuição das somas de árvores
 
+.pull-left[
 
+&lt;img src="img/xgboost_tuned.gif" style="width: 100%;"/&gt;
 
-&lt;img src="img/xgboost_tuned.gif" style="width: 40%;"/&gt;
+]
+
+.pull-right[
+
+Cada "step" é uma árvore
+
+&lt;img src="img/xgb_arvores.png" style="width: 100%;"/&gt;
+
+]
 
 
 ---
@@ -247,14 +300,45 @@ class: inverse, middle, center
 
 # XGBoost
 
-## Exemplo passo-a-passo
+## Exemplo passo-a-passo (no pptx)
+
+
+---
+
+class: inverse, middle, center
+
+# XGBoost
+
+## Na prática
+
+---
+
+# Sobre os problemas nos dados
+
+- XGBoost trata missing automaticamente dentro dele, não precisa tratar. Porém, sempre vale técnicas de imputação para tentar aprimorar o modelo!
+
+- Multicolinearidade não é um problema grave para modelos de árvore. Mas é sempre bom filtrar variáveis explicativas muito correlacionadas. [Ler esse post para exemplo.](https://www.curso-r.com/blog/2018-05-22-arvore-e-multicolinearidade/)
+
+- Variável resposta precisa ir como factor. Não pode ser character nem 0/1.
+
+- As variáveis categóricas precisam ser "dummyficadas" antes. XGBoost só aceita explicativas numéricas.
+
+- A escala das variáveis explicativas não atrapalham modelos de árvores.
+
+- A assimetria das variáveis explicativas não atrapalham modelos de árvores.
+
+
+---
+
+# Intuição de overfitting
+
 
 
 ---
 
 # Extrapolação dos modelos de árvores
 
-![](modelos-de-arvores_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+![](xgboost_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
@@ -302,25 +386,9 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     }
     deleted = true;
   });
-})();
-(function() {
-  "use strict"
-  // Replace <script> tags in slides area to make them executable
-  var scripts = document.querySelectorAll(
-    '.remark-slides-area .remark-slide-container script'
-  );
-  if (!scripts.length) return;
-  for (var i = 0; i < scripts.length; i++) {
-    var s = document.createElement('script');
-    var code = document.createTextNode(scripts[i].textContent);
-    s.appendChild(code);
-    var scriptAttrs = scripts[i].attributes;
-    for (var j = 0; j < scriptAttrs.length; j++) {
-      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
-    }
-    scripts[i].parentElement.replaceChild(s, scripts[i]);
-  }
-})();
+})();</script>
+
+<script>
 (function() {
   var links = document.getElementsByTagName('a');
   for (var i = 0; i < links.length; i++) {
@@ -329,23 +397,7 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     }
   }
 })();
-// adds .remark-code-has-line-highlighted class to <pre> parent elements
-// of code chunks containing highlighted lines with class .remark-code-line-highlighted
-(function(d) {
-  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
-  const preParents = [];
-  const findPreParent = function(line, p = 0) {
-    if (p > 1) return null; // traverse up no further than grandparent
-    const el = line.parentElement;
-    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
-  };
-
-  for (let line of hlines) {
-    let pre = findPreParent(line);
-    if (pre && !preParents.includes(pre)) preParents.push(pre);
-  }
-  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
-})(document);</script>
+</script>
 
 <script>
 slideshow._releaseMath = function(el) {
