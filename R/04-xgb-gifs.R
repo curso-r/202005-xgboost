@@ -70,10 +70,10 @@ gera_gif <- function(trees = 100, min_n = 1,
 
 # gera gif
 gera_gif( 
-  trees = 30, 
+  trees = 60, 
   min_n = 1, 
-  tree_depth = 1, 
-  learn_rate = 1, 
+  tree_depth = 2, 
+  learn_rate = 0.3, 
   sample_size = 0.5, 
-  loss_reduction = 1
+  loss_reduction = 0.5
 )

@@ -16,19 +16,21 @@ data <- tribble(
 #
 # tree_depth = tree_depth
 # loss_reduction = gamma
-# lambda = lambda
+# trees = trees
 # learn_rate = eta
 
 xgb_model <- boost_tree(
   mode = "regression", 
   mtry = 1, 
   sample_size = 1,
-  min_n = 1, 
+  min_n = 1,
   
   # -----------------------------------
   # PREENCHA AQUI (solução tem 4 linhas!)
-  
-  
+  loss_reduction = 0,
+  learn_rate = 0.3,
+  tree_depth = 2,
+  trees = 2
   #-------------------------------------
 ) %>%
   set_engine("xgboost", lambda = 0)
@@ -40,11 +42,18 @@ data %>% mutate(
   pred = predict(xgb_fit, data)$.pred
 )
 
+library(xgboost)
+library(DiagrammeR)
+xgb.plot.tree(model=xgb_fit$fit)
+
 # bonus: SQL ------------------------------------
 con <- DBI::dbConnect(RSQLite::SQLite(), "meu_sqlite_db.db")
 tidypredict_sql(xgb_fit$fit, con)
 
 copy_to(con, data, "data", overwrite = TRUE)
+
+db_list_tables(con)
+
 data_sql <- tbl(con, "data") %>%
   mutate(
     pred = !!tidypredict_sql(xgb_fit$fit, con)

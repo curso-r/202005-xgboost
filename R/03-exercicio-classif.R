@@ -9,7 +9,10 @@ data <- tribble(
   8, "curou",
   12, "curou",
   16, "não curou"
-) 
+) %>%
+  mutate(
+    curou = factor(curou)
+  )
 
 # especificacao do modelo ---------------------------------
 # mapa dos hiperparâmetros:
@@ -23,7 +26,7 @@ data <- tribble(
 # não queremos "regression" mais, queremos "classification"
 
 xgb_model <- boost_tree(
-  mode = "regression", 
+  mode = "classification", 
   mtry = 1, 
   sample_size = 1,
   min_n = 1, 
@@ -67,7 +70,7 @@ xgb_fit
 predict(xgb_fit, data, type = "prob")
 
 
-
+predict(xgb_fit, data)
 
 
 # tabela com as predições

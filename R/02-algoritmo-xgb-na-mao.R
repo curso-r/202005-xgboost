@@ -9,11 +9,13 @@ loss <- function(y, y_hat) {
   (y - y_hat)^2
 }
 
-d_loss <- function(y, y_hat) {
+# gradiente (G)
+G <- function(y, y_hat) {
   - 2 * (y - y_hat)
 }
 
-d2_loss <- function(y, y_hat) {
+# hessiana (H)
+H <- function(y, y_hat) {
   - 2
 }
 
@@ -24,6 +26,7 @@ f <- function(x, arvores) {
     return(r)
   
   r <- rep(0, length(x))
+  # soma as árvores (os case_whens)
   for (arvore in arvores) {
     r <- r + lr * predict(arvore, tibble(x = x))
   }
@@ -33,16 +36,15 @@ f <- function(x, arvores) {
 arvores <- list()
 lr <- 0.1
 
-for (i in 1:100) {
-  
-  y_hat <- f(x, arvores)
-  r <- d_loss(y, y_hat)/d2_loss(y, y_hat)
-  
+
+trees <- 100
+for (i in 1:trees) {
+  y_hat <- 0.5 + f(x, arvores[[1]])
+  r <- G(y, y_hat)/d2_loss(y, y_hat) #output
   arvores[[i]] <- tree::tree(r ~ x)
-  
 }
 
 tibble(x = x, y = y) %>% 
   ggplot(aes(x = x, y = y)) +
   geom_point() +
-  stat_function(fun = f, args = list(arvores = arvores))
+  stat_function(fun = f, args = list(arvores = arvores), colour = "red", size = 1)
